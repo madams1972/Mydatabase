@@ -9,7 +9,7 @@ module.exports = {
     name: "initAnswer",
     choices: [
       "View all departments",
-      "View all title",
+      "View all role",
       "View all employees",
       "Add a department",
       "Add a role",
@@ -25,7 +25,7 @@ module.exports = {
     name: "deptName",
   },
 
-  addEmpQuestions: (title, employees) => [
+  addEmpQuestions: (role, employees) => [
     {
       type: "input",
       message: "What is your employee's first name?",
@@ -38,9 +38,9 @@ module.exports = {
     },
     {
       type: "list",
-      message: "What is your employee's title ID?",
-      name: "title_id",
-      choices: title,
+      message: "What is your employee's role ID?",
+      name: "role_id",
+      choices: role,
     },
     {
       type: "list",
@@ -49,21 +49,19 @@ module.exports = {
       choices: employees,
     },
   ],
-  updateEmpQuestions: (employees, title) => [
+  updateEmpQuestions: (employees, role) => [
     {
       type: "list",
       message: "Choose an employee to update:",
       name: "employee",
       choices: employees,
-      //   () => {
-      //     return employees.map((employee) => employee.name);
-      //   },
+     
     },
     {
       type: "list",
-      message: "What is this employee's new title?",
-      name: "newtitle",
-      choices: title,
+      message: "What is this employee's new role?",
+      name: "newrole",
+      choices: role,
     },
   ],
 };

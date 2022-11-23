@@ -1,4 +1,4 @@
-INSERT INTO title (title, salary, department_id)
+INSERT INTO role(title, salary, department_id)
 VALUES  ("Program Manager", 90000, 1),
         ("Operations Manager", 90000, 2),
         ("Corprate Partners Manager", 90000, 3),
