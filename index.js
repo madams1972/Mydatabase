@@ -20,7 +20,7 @@ const menu = [
     type: 'list',
     message: 'What would you like to do?',
     name: 'menu',
-    choices: ['view all departments', 'view all titles', 'add a department', 'view all employees', 'add a title', 'add an employee', 'update an employee title', 'exit']
+    choices: ['view all departments', 'view all roles', 'add a department', 'view all employees', 'add a role', 'add an employee', 'update an employee role', 'exit']
   }
 ];
 
@@ -33,13 +33,13 @@ function init() {
           await console.table(results)
           init();
         });
-      } else if (answers.menu === 'view all titles') {
-        db.query('SELECT title.id, title.title, title.salary, department.name FROM title JOIN department ON title.department_id = department.id', async function (err, results) {
+      } else if (answers.menu === 'view all roles') {
+        db.query('SELECT role.id, role.role, role.salary, department.name FROM role JOIN department ON role.department_id = department.id', async function (err, results) {
           await console.table(results)
           init();
         });
       } else if (answers.menu === 'view all employees') {
-        db.query('SELECT employee.id, employee.first_name, employee.last_name, title.title FROM employee JOIN title ON employee.title_id = title.id', async function (err, results) {
+        db.query('SELECT employee.id, employee.first_name, employee.last_name, role.role FROM employee JOIN role ON employee.role_id = role.id', async function (err, results) {
           await console.table(results)
           init();
         })
@@ -58,28 +58,28 @@ function init() {
             init();
           }
         )
-      } else if (answers.menu === 'add a title') {
+      } else if (answers.menu === 'add a role') {
         db.query('SELECT id AS value, name FROM department', function (err, results) {
           inquirer.prompt([
             {
               type: 'input',
-              message: 'What is name of the title?',
-              name: 'title'
+              message: 'What is name of the role?',
+              name: 'role'
             },
             {
               type: 'input',
-              message: 'What is the salary of this title?',
+              message: 'What is the salary of this role?',
               name: 'salary'
             },
             {
               type: 'list',
               choices: results,
-              message: 'What department id does this title fall under?',
+              message: 'What department id does this role fall under?',
               name: 'department'
             }
           ]).then(
             answers => {
-              db.query('INSERT INTO title (title, salary, department) VALUES (?, ?, ?)', [answers.title, answers.salary, answers.department], function (err, results) {
+              db.query('INSERT INTO role (role, salary, department) VALUES (?, ?, ?)', [answers.role, answers.salary, answers.department], function (err, results) {
                 console.table(results);
 
                 init();
@@ -88,7 +88,7 @@ function init() {
         })
 
       } else if (answers.menu === 'add an employee') {
-        db.query('SELECT id AS value, title AS name FROM title', function (err, results) {
+        db.query('SELECT id AS value, role AS name FROM role', function (err, results) {
           inquirer.prompt([
             {
               type: 'input',
@@ -103,19 +103,19 @@ function init() {
             {
               type: 'list',
               choices: results,
-              message: 'what title does this employee fall under',
-              name: 'title'
+              message: 'what role does this employee fall under',
+              name: 'role'
             }
           ]).then(
             answers => {
 
-              db.query('INSERT INTO employee (first_name, last_name, title_id) VALUES (?, ?, ?)', [answers.first, answers.last, answers.title], function (err, results) {
+              db.query('INSERT INTO employee (first_name, last_name, role_id) VALUES (?, ?, ?)', [answers.first, answers.last, answers.role], function (err, results) {
                 console.table(results)
                 init();
               })
             })
         })
-      } else if (answers.menu === 'update an employee title') {
+      } else if (answers.menu === 'update an employee role') {
         db.query('SELECT * FROM employee', function (err, employees)  {
           employees = employees.map((employee) => {
             return {
@@ -123,11 +123,11 @@ function init() {
               value: employee.id,
             };
           });
-          db.query('SELECT * FROM title', function (err, titles) {
-            titles = titles.map((title) => {
+          db.query('SELECT * FROM role', function (err, roles) {
+            roles = roles.map((role) => {
               return {
-                name: title.title,
-                value: title.id,
+                name: role.role,
+                value: role.id,
               };
             })
         
@@ -136,21 +136,21 @@ function init() {
             {
               type: 'list',
               choices: employees,
-              message: 'Which employee gets a title change today?',
+              message: 'Which employee gets a role change today?',
               name: 'update'
             },
             {
               type: 'list',
-              choices: titles,
-              message: 'What is the employees new title?',
-              name: 'updatetitle',
+              choices: roles,
+              message: 'What is the employees new role?',
+              name: 'updaterole',
             },
           ])
           .then((answers) => {
            db.query('UPDATE employee SET ? WHERE ?',
            [
             {
-              title_id: answers.updatetitle,
+              role_id: answers.updaterole,
             },
             {
               id: answers.update,
