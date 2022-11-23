@@ -6,13 +6,11 @@ const mysql = require('mysql2');
 const db = mysql.createConnection(
   {
     host: 'localhost',
-    // MySQL username,
     user: 'root',
-    // MySQL password
-    password: '123456789',
-    database: 'business_db'
+    password: 'Scrappy2020!',
+    database: 'Employee_db'
   },
-  console.log(`Connected to the business_db database.`)
+  console.log(`Connected to the emloyee_db database.`)
 );
 
 const menu = [
@@ -20,7 +18,15 @@ const menu = [
     type: 'list',
     message: 'What would you like to do?',
     name: 'menu',
-    choices: ['view all departments', 'view all roles', 'add a department', 'view all employees', 'add a role', 'add an employee', 'update an employee role', 'exit']
+    choices: [
+      'view all departments', 
+      'view all roles', 
+      'add a department', 
+      'view all employees', 
+      'add a role', 
+      'add an employee', 
+      'update an employee role', 
+      'exit']
   }
 ];
 
