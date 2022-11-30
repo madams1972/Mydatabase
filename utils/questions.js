@@ -1,6 +1,6 @@
 //centralized list of question used by inquirer in app.js
 const inquirer = require("inquirer");
-const db = require("../connection/server.js");
+const db = require("../connections/connections");
 
 module.exports = {
   initQuestions: {
@@ -9,7 +9,7 @@ module.exports = {
     name: "initAnswer",
     choices: [
       "View all departments",
-      "View all role",
+      "View all roles",
       "View all employees",
       "Add a department",
       "Add a role",
@@ -25,7 +25,7 @@ module.exports = {
     name: "deptName",
   },
 
-  addEmpQuestions: (role, employees) => [
+  addEmpQuestions: (roles, employees) => [
     {
       type: "input",
       message: "What is your employee's first name?",
@@ -38,9 +38,9 @@ module.exports = {
     },
     {
       type: "list",
-      message: "What is your employee's role ID?",
+      message: "What is your employee's roleID?",
       name: "role_id",
-      choices: role,
+      choices: roles,
     },
     {
       type: "list",
@@ -49,19 +49,18 @@ module.exports = {
       choices: employees,
     },
   ],
-  updateEmpQuestions: (employees, role) => [
+  updateEmpQuestions: (employees, roles) => [
     {
       type: "list",
       message: "Choose an employee to update:",
       name: "employee",
       choices: employees,
-     
     },
     {
       type: "list",
       message: "What is this employee's new role?",
-      name: "newrole",
-      choices: role,
+      name: "newRole",
+      choices: roles,
     },
   ],
 };

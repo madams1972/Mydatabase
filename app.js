@@ -1,5 +1,5 @@
 //Linking all requirements
-const db = require("./connections/connections");
+const db = require("./connections/server.js");
 const ask = require("./utils/questions");
 const inquirer = require("inquirer");
 const cTable = require("console.table");
