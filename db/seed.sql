@@ -19,8 +19,8 @@ VALUES (1, "Program Manager", 90000, 1),
         (7, "HR Specialist", 50000, 2);
 
 INSERT INTO employee (id, first_name, last_name, role_id, manager_id)
-VALUES  (1,"Kylie", "Jenner",  2, null),
-        (2, "Malissa", "Adams", 4, null),
+VALUES  (1,"Kylie", "Jenner",  2, 2),
+        (2, "Malissa", "Adams", 4, 1),
         (3, "James", "Nagbe", 5, 2),
         (4, "Rebekah", "Kallhoff", 3, 1),
         (5, "Missi", "Arens", 1, 1 );
