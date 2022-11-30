@@ -1,6 +1,6 @@
 //centralized list of question used by inquirer in app.js
 const inquirer = require("inquirer");
-const db = require("../connections/server.js");
+const db = require("../connection/server.js");
 
 module.exports = {
   initQuestions: {
