@@ -3,7 +3,7 @@ const db = require("./connections/server.js");
 const ask = require("./utils/questions");
 const inquirer = require("inquirer");
 const cTable = require("console.table");
-const { updateEmployee } = require("./utils/questions");
+const {updateEmployee} = require("./utils/questions");
 const mysql = require("mysql2");
 
 
